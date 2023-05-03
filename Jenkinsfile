@@ -8,7 +8,7 @@ pipeline {
 	
     parameters {
         string(name: 'SCENARIO_NAME', 
-                    defaultValue: "", 
+                    defaultValue: "ALL", 
                     description: 'Ingresar el nombre del escenario que quieres ejecutar. o escribe ALL si quieres ejecutar todos. Ejemplos: "scenario1" , "scenario2", "ALL"'
                 )
 
