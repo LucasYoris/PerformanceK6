@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Levantando Contenedor') {
            steps {
-                    sh "docker-compose up -d influxdb grafana"
+                    powershell "docker-compose up -d influxdb grafana"
              }
         }
         stage('Instalando Dependencias NodeJs') {
