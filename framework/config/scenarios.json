@@ -1,0 +1,10 @@
+{
+    "scenarios": {
+      "scenario1": {
+        "exec": "scenario1"
+      },
+      "scenario2": {
+        "exec": "scenario2"
+      }
+    }
+  }
