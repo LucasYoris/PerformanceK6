@@ -1,6 +1,7 @@
-def GIT_REPOSITORY = "https://github.com/MarcoAntonioMamani/FWEcosistemasK6.git"
+def GIT_REPOSITORY = "https://github.com/LucasYoris/PerformanceK6.git"
 def MAIL_TO = "lucasyoris3@gmail.com"
 def MAIL_SUBJECT = 'Prueba de Performance - Ejecución # ${BUILD_NUMBER}'
+def GIT_BRANCH = 'master'
 
 pipeline {
     agent any
@@ -32,7 +33,7 @@ pipeline {
         stage('Clone Project Performance') {
             steps {
                 deleteDir()
-                git branch: 'main', credentialsId: 'Credential_Marco', url: GIT_REPOSITORY
+                git branch: GIT_BRANCH , credentialsId: 'lucasGitCredentials', url: GIT_REPOSITORY
             }
         }
         stage('Levantando Contenedor') {
