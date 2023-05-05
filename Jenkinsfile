@@ -48,7 +48,7 @@ pipeline {
         stage('Ejecutando Prueba Performance') {
             steps {
                 script {
-                    sh "docker-compose run --rm k6 run --env SCENARIO_NAME=all --env TEST_TYPE=stress --env STRESS_DURATION=10s --env TARGET_VUS=20 --rps 30 --out csv=/results/Build${env.BUILD_NUMBER}.csv --out influxdb=http://influxdb:8086/k6 ./framework/main.js --tag testid=Build${env.BUILD_NUMBER}"
+                    sh "docker-compose run --rm k6 run --env SCENARIO_NAME=all --env TEST_TYPE=stress --env STRESS_DURATION=10s --env TARGET_VUS=20 --rps 30 --out csv=/results/Build${env.BUILD_NUMBER}.csv --out influxdb=http://influxdb:8086/k6 framework/main.js --tag testid=Build${env.BUILD_NUMBER}"
                 }
             }
         }
