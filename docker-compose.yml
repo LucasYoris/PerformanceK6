@@ -3,8 +3,6 @@ version: '3.4'
 networks:
   k6:
   grafana:
-  influxdb:
-  nodejs:
 
 services:
   jenkins:
