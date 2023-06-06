@@ -1,0 +1,78 @@
+#Delete everything
+docker-compose down --remove-orphans
+docker rmi -f $(docker images -a -q)
+
+#Run admin
+docker exec -u root -t -i container_id /bin/bash
+--------------------------------------------------------------------------
+#Create Dockerfile
+-----------------
+FROM jenkins/jenkins:lts
+USER root
+RUN apt-get update -qq \
+    && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+RUN add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable"
+RUN apt-get update  -qq \
+    && apt-get -y install docker-ce
+RUN usermod -aG docker jenkins
+RUN curl -L https://github.com/docker/compose/releases/download/2.17.3/run.sh -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+---------------------------------------------------------------------------
+docker image build -t custom-jenkins-docker .
+---------------------------------------------------------------------------
+docker run --name jenkins_docker -it -p 8080:8080 -p 50000:50000 -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home custom-jenkins-docker
+---------------
+#install docker-compose in jenkins container
+curl -L https://github.com/docker/compose/releases/download/1.25.4/run.sh -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+
+
+
+Install chocolately----------------------------------------------------
+  https://chocolatey.org/install
+ 
+Install influxDB-------------------------------------------------------
+  choco install influxdb
+ 
+Install Grafana OSS version--------------------------------------------
+  https://grafana.com/grafana/download?edition=oss&platform=windows
+ 
+Create InfluxDB database-----------------------------------------------
+--->go to C:\influxdata\influxdb-1.8.10-1 then execute influxd.exe and let open it
+--->Then open influx.exe
+--->Execute nexts commands lines
+      create database k6database
+      show databases
+--->Check if your database name was showed
+ 
+Open and configurate Grafana-------------------------------------------
+  default url: http://localhost:3000/
+  user: admin
+  pass: admin
+---------------
+--->Configuration>Add new data source
+    URL: http://localhost:8086/
+    Database: k6database (created with influxDB)
+--->Save & test
+---------------
+--->Dashboards> +import
+--->Download .json dashboard
+      https://grafana.com/grafana/dashboards/4411-k6-load-testing-results/?tab=revisions
+--->Upload json file to Grafana > DUMMY: Select data source > Load
+---------------
+ 
+InfluxDB commands--------------------------------------------
+  https://programmerclick.com/article/1779537673/
+      create database k6database
+      show databases
+      drop database k6database
+ 
+Grafana dashboard--------------------------------------------
+  https://grafana.com/grafana/dashboards/4411-k6-load-testing-results/?tab=revisions
+
+

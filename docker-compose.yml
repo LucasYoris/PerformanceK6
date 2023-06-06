@@ -71,3 +71,4 @@ services:
       - ./framework:/framework
       - ./results:/results
       - ./nodejs:/nodejs
+      - ./taller:/taller
