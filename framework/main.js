@@ -3,7 +3,7 @@ import configLoad from "./config/load.js";
 export * from "./scenarios/moduloTransferencias.js";
 
 
-const BASE_URL = __ENV.BASE_URL || "https://www.bg.com.bo";
+const BASE_URL = __ENV.BASE_URL || "https://demoqa.com/";
 const PAUSE_MIN = __ENV.PAUSE_MIN || 1;
 const PAUSE_MAX = __ENV.PAUSE_MAX || 5;
 
